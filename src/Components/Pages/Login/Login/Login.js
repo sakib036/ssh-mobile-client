@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [loginError, setLoginError] = useState('');
+    const {signIn}=useContext(AuthContext);
 
     const handelLogin = data => {
         console.log(data);
         setLoginError('');
-        console.log(data.email, data.password)
-        // .then(result => {
-        //     const user = result.user;
-        //     setLoginUserEmail(data.email);
-        //     console.log(user);
+        signIn(data.email, data.password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
 
-        // })
-        // .catch(error => {
-        //     console.error(error.message);
-        //     setLoginError(error.message);
+        })
+        .catch(error => {
+            console.error(error.message);
+            setLoginError(error.message);
 
-        // })
+        })
     }
 
     return (
-        <div>
+        <div className='my-12'>
             <div className='flex justify-center items-center'>
 
                 <div className='w-96 border-2 p-6 rounded-xl'>

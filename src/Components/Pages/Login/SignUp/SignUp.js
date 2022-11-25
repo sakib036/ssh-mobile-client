@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -24,6 +25,8 @@ const SignUp = () => {
 
     const handelSignUp = data => {
 
+        console.log(data.userType)
+
 
         setSignUpError('');
         createUser(data.email, data.password)
@@ -42,15 +45,15 @@ const SignUp = () => {
                     .then(res => res.json())
                     .then(imageData => {
                         if (imageData.success) {
-                            console.log(imageData.data.url)
+                           
                             const userInfo = {
                                 displayName: data.name,
                                 userImage:imageData.data.url,
+                                
                             }
                             updateUserProfile(userInfo)
-                                        .then(() => {
-                                           
-            
+                                        .then(() =>{
+                                            saveUserDb(data.name, data.email,data.userType,imageData.data.url,)
                                         })
                                         .catch(error => {
                                             console.error(error.message)
@@ -64,6 +67,11 @@ const SignUp = () => {
                         setSignUpError(error.message);
 
                     })
+
+                    const saveUserDb=(name,email,userType,userImage)=>{
+                        const user={name,email,userType,userImage}
+                        console.log(user);
+                    }
 
                 // const saveUser = (name, email) => {
                 //     const user = { name, email };
@@ -88,7 +96,8 @@ const SignUp = () => {
 
 
     return (
-        <div className='flex justify-center items-center'>
+       
+        <div className='flex justify-center items-center my-12'>
 
             <div className='w-96 border-2 p-6 rounded-xl'>
                 <div>
@@ -135,12 +144,11 @@ const SignUp = () => {
                         {errors.email && <p className='text-red-400' role="alert">{errors.email?.message}</p>}
                     </div>
                     <div>
-                        <select type="text" {...register("user-type", { required: "user-type is required" })} className="select select-bordered w-full  mt-6">
+                        <select type="text" {...register("userType")} className="select select-bordered w-full  mt-6">
 
                             <option selected>User</option>
                             <option>Seller</option>
                         </select>
-                        {errors.text && <p className='text-red-400' role="alert">{errors.text?.message}</p>}
                     </div>
                     <div className="form-control w-full ">
                         <label className="label">
