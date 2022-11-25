@@ -13,7 +13,7 @@ const SignUp = () => {
     const [signUpError, setSignUpError] = useState('');
 
     const [createUserEmail, setCreateUserEmail] = useState('');
-    console.log(createUserEmail)
+
 
     // const [token] = useToken(createUserEmail)
     // const navigate = useNavigate();
@@ -23,47 +23,64 @@ const SignUp = () => {
     // }
 
     const handelSignUp = data => {
-        console.log(data);
+
+
         setSignUpError('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                // const userInfo = {
-                //     displayName: data.name
-                // }
-        //         updateUserProfile(userInfo)
-        //             .then(() => {
-        //                 saveUser(data.name, data.email)
 
-        //             })
-        //             .catch(error => {
-        //                 console.error(error.message)
-        //                 setSignUpError(error.message)
-        //             })
-        //     })
-        //     .catch(error => {
-        //         console.error(error.message);
-        //         setSignUpError(error.message);
-
-        //     })
-
-        // const saveUser = (name, email) => {
-        //     const user = { name, email };
-        //     fetch('https://doctors-portal-server-self.vercel.app/users', {
-        //         method: 'POST',
-        //         headers: {
-        //             'content-type': 'application/json'
-        //         },
-        //         body: JSON.stringify(user)
-        //     })
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             console.log(data)
-        //             setCreateUserEmail(email)
-
-
+                const picture = data.file[0];
+                const formData = new FormData();
+                formData.append('image', picture);
+                const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imagebb_key}`
+                fetch(url, {
+                    method: 'POST',
+                    body: formData,
                 })
+                    .then(res => res.json())
+                    .then(imageData => {
+                        if (imageData.success) {
+                            console.log(imageData.data.url)
+                            const userInfo = {
+                                displayName: data.name,
+                                userImage:imageData.data.url,
+                            }
+                            updateUserProfile(userInfo)
+                                        .then(() => {
+                                           
+            
+                                        })
+                                        .catch(error => {
+                                            console.error(error.message)
+                                            setSignUpError(error.message)
+                                        })
+                             
+                        }
+                    })                      
+                    .catch(error => {
+                        console.error(error.message);
+                        setSignUpError(error.message);
+
+                    })
+
+                // const saveUser = (name, email) => {
+                //     const user = { name, email };
+                //     fetch('https://doctors-portal-server-self.vercel.app/users', {
+                //         method: 'POST',
+                //         headers: {
+                //             'content-type': 'application/json'
+                //         },
+                //         body: JSON.stringify(user)
+                //     })
+                //         .then(res => res.json())
+                //         .then(data => {
+                //             console.log(data)
+                //             setCreateUserEmail(email)
+
+
+            })
 
         // }
     }
@@ -75,11 +92,29 @@ const SignUp = () => {
 
             <div className='w-96 border-2 p-6 rounded-xl'>
                 <div>
-                    <h1 className='text-center'>SignUp</h1>
+                    <h1 className='text-center text-3xl font-bold'>SignUp</h1>
                 </div>
 
 
                 <form onSubmit={handleSubmit(handelSignUp)}>
+
+
+                    <div class="flex items-center space-x-6">
+                        <div class="shrink-0">
+                            <img className="h-16 w-16 object-cover rounded-full my-4" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80" alt="" />
+                        </div>
+                        <label className="block">
+                            <span className="sr-only">Choose profile photo</span>
+                            <input type="file" {...register("file", { required: "Picture is required" })} className="block w-full text-sm text-slate-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-full file:border-0
+      file:text-sm file:font-semibold
+      file:bg-violet-50 file:text-violet-700
+      hover:file:bg-violet-100
+    "/>
+                            {errors.file && <p className='text-red-400' role="alert">{errors.file?.message}</p>}
+                        </label>
+                    </div>
 
 
 
@@ -90,12 +125,22 @@ const SignUp = () => {
                         <input type="text" {...register("name", { required: "Name is required" })} placeholder="name" className="input input-bordered w-full " />
                         {errors.name && <p className='text-red-400' role="alert">{errors.name?.message}</p>}
                     </div>
+
+
                     <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
                         <input type="email" {...register("email", { required: "Email Address is required" })} placeholder="email" className="input input-bordered w-full " />
                         {errors.email && <p className='text-red-400' role="alert">{errors.email?.message}</p>}
+                    </div>
+                    <div>
+                        <select type="text" {...register("user-type", { required: "user-type is required" })} className="select select-bordered w-full  mt-6">
+
+                            <option selected>User</option>
+                            <option>Seller</option>
+                        </select>
+                        {errors.text && <p className='text-red-400' role="alert">{errors.text?.message}</p>}
                     </div>
                     <div className="form-control w-full ">
                         <label className="label">
