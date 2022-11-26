@@ -1,0 +1,79 @@
+[
+    {
+      "sellerName": "Moody",
+      "brandName": "Samsung",
+      "resalePrice": "10000",
+      "originalPrice": "30000",
+      "picture": "https://i.ibb.co/hgQSfkF/samsung-galaxy-m32-5g-new.jpg ",
+      "yearsOfUse": 3,
+      "sellerPhone": "+880 (924) 462-2702",
+      "submitDate": "Apr 25 2020",
+      "details": "Samsung Galaxy M33 5G, SIM-Hybrid Dual Nano SIM, Material-Gorilla Glass 5 front, plastic body,Weight-215 grams."
+    },
+    {
+      "sellerName": "Luella",
+      "brandName": "Samsung",
+      "resalePrice": "12000",
+      "originalPrice": "25000",
+      "picture": "https://i.ibb.co/Cw2VLCP/sg-m23.jpg ",
+      "yearsOfUse": 2,
+      "sellerPhone": "+880 (943) 460-3517",
+      "submitDate": "Feb 02 2017",
+      "details": "Samsung Galaxy M23, SIM-Hybrid Dual Nano SIM, Material-Gorilla Glass 5 front, plastic body Weight-215 grams."
+    },
+    {
+      "sellerName": "Rice",
+      "brandName": "iphone",
+      "resalePrice": "12000",
+      "originalPrice": "65000",
+      "picture": "https://i.ibb.co/NjHHGwh/Apple-i-Phone-8-Plus.jpg",
+      "yearsOfUse": 3,
+      "sellerPhone": "+880 (862) 458-2858",
+      "submitDate": "Dec 29 2019 ",
+      "details": "Apple iPhone 8 SIM-Nano SIM Material-Gorilla Glass front & back, aluminum frame, Weight-148 grams"
+    },
+    {
+      "sellerName": "Fern",
+      "brandName": "iphone",
+      "resalePrice": "25000",
+      "originalPrice": "40000",
+      "picture": "https://i.ibb.co/7jnWHKt/samsung-galaxy-a73-mint-front-m.jpg",
+      "yearsOfUse": 1,
+      "sellerPhone": "+880 (855) 474-2515",
+      "submitDate": "May 14 2020",
+      "details": "Apple iPhone 7 SIM-Nano SIM Material-Gorilla Glass front & back, aluminum frame, Weight-200 grams"
+    },
+    {
+      "sellerName": "Dodson",
+      "brandName": "Oppo",
+      "resalePrice": "10000",
+      "originalPrice": "20000",
+      "picture": "https://i.ibb.co/b2H7vvy/oppo-a76.jpg",
+      "yearsOfUse": 1,
+      "sellerPhone": "+880 (820) 579-2260",
+      "submitDate": "Mar 12 2021",
+      "details": "Oppo A76 , SIM-Dual Nano SIM Material-Gorilla Glass 5 front, plastic body,Weight-215 grams"
+    },
+    {
+      "sellerName": "Dollie",
+      "brandName": "Walton",
+      "resalePrice": "7000",
+      "originalPrice": "2000",
+      "picture": "https://i.ibb.co/PN4Wbr8/walton.jpg",
+      "yearsOfUse": 1,
+      "sellerPhone": "+880 (958) 594-2580",
+      "submitDate": "Apr 09 2021",
+      "details": "Walton Primo S8 , SIM-Dual Nano SIM Material-Gorilla Glass 3 front, plastic body,Weight-185 grams"
+    },
+    {
+      "sellerName": "Mable",
+      "brandName": "OnePlus",
+      "resalePrice": "8000",
+      "originalPrice": "20000",
+      "picture": "https://i.ibb.co/0Q17JLP/onePlus.jpg",
+      "yearsOfUse": 2,
+      "sellerPhone": "+880 (948) 519-3131",
+      "submitDate": "Aug 10 2020",
+      "details": "OnePlus Nord N100,SIM-Dual Nano SIM Material-Gorilla Glass 3 front, plastic body,Weight-185 grams"
+    }
+  ]
