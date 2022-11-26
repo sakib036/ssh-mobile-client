@@ -7,13 +7,30 @@ import Loading from '../../../Common/Loading/Loading';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
+// import "swiper/css/pagination";
 // import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
+import { useNavigate } from 'react-router-dom';
 
 // Import Swiper styles
 
 const PhoneCategory = () => {
+    const navigate=useNavigate();
+
+    const handelCategorySearch=(brand)=>{
+        fetch(`http://localhost:5000/mobiles/${brand}`)
+            
+        .then(res=>res.json())
+        .then(data=>{
+
+            console.log(data)
+            navigate(`/mobiles/${brand}`)
+           
+        })
+
+        .catch(error=>console.error(error))
+        
+    }
 
     const { data: mobiles = [], isLoading } = useQuery({
         queryKey: ['mobiles'],
@@ -23,21 +40,21 @@ const PhoneCategory = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(mobiles)
+   
 
     const samsungs = mobiles.filter(mobile => mobile.brandName === 'samsung');
-    console.log(samsungs);
+   
     const iphones = mobiles.filter(mobile => mobile.brandName === 'iphone');
-    console.log(iphones);
+    
     const others = mobiles.filter(mobile => mobile.brandName !== 'samsung' && mobile.brandName !== 'iphone');
-    console.log(others);
+  
 
 
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
 
            <div>
-            <button className='text-3xl font-bold text-center my-6 btn btn-active btn-primary'>Samsung Brand</button>
+            <button onClick={()=>handelCategorySearch('samsung')} className='text-3xl font-bold text-center my-6 btn btn-active btn-primary mx-2'>Samsung Brand</button>
            <>
                 <Swiper
                  
@@ -71,7 +88,7 @@ const PhoneCategory = () => {
            </div>
 
             <div>
-                <button className='text-3xl font-bold text-center my-6 btn btn-active btn-secondary'>Iphone Brand</button>
+                <button onClick={()=>handelCategorySearch('iphone')} className='text-3xl font-bold text-center my-6 btn btn-active btn-secondary mx-2'>Iphone Brand</button>
             <>              
                <Swiper
 
@@ -104,7 +121,7 @@ const PhoneCategory = () => {
             </div>
 
             <div>
-                <button className='text-3xl font-bold text-center my-6 btn btn-active btn-info'>Others Brand</button>
+                <button onClick={()=>handelCategorySearch('other')} className='text-3xl font-bold text-center my-6 btn btn-active btn-info mx-2'>Others Brand</button>
             <>
               <Swiper
 

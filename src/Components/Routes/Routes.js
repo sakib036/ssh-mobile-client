@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
 import Home from "../Pages/Home/Home/Home";
+import AllChategoryPhone from "../Pages/Home/PhoneCategory/AllCategoryPhone/AllChategoryPhone";
+import PhoneDetails from "../Pages/Home/PhoneCategory/PhoneDetails/PhoneDetails";
 import Login from "../Pages/Login/Login/Login";
 import SignUp from "../Pages/Login/SignUp/SignUp";
 
@@ -25,6 +27,16 @@ const routes=createBrowserRouter([
             {
                 path:'/signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path:'/mobiles/:brand',
+                element: <AllChategoryPhone></AllChategoryPhone>,
+                loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}`),
+            },
+            {
+                path:'/mobiles/:brand/:id',
+                element: <PhoneDetails></PhoneDetails>,
+                loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}/${params.id}`),
             },
         ]
     }
