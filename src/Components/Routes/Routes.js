@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
+import MyOrder from "../Pages/Dashboard/MyOrder/MyOrder";
+
 import Home from "../Pages/Home/Home/Home";
 import AllChategoryPhone from "../Pages/Home/PhoneCategory/AllCategoryPhone/AllChategoryPhone";
 import PhoneDetails from "../Pages/Home/PhoneCategory/PhoneDetails/PhoneDetails";
@@ -39,6 +42,18 @@ const routes=createBrowserRouter([
                 element: <PrivateRoutes><PhoneDetails></PhoneDetails></PrivateRoutes>,
                 loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}/${params.id}`),
             },
+        ]
+    },
+    {
+        path:'/dashboard',
+        element:<PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+        children:[
+            {
+                path:'/dashboard',
+                element:<MyOrder></MyOrder> 
+            }
+
+
         ]
     }
 ])

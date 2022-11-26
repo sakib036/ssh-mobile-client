@@ -31,6 +31,7 @@ const BookingModal = ({ phoneDetails }) => {
             mobileModel:model,
             buyersLocation:location,
             phoneId:_id,
+            picture,
 
             mobilePrice:price,
 
