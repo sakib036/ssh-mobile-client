@@ -6,6 +6,7 @@ import AllChategoryPhone from "../Pages/Home/PhoneCategory/AllCategoryPhone/AllC
 import PhoneDetails from "../Pages/Home/PhoneCategory/PhoneDetails/PhoneDetails";
 import Login from "../Pages/Login/Login/Login";
 import SignUp from "../Pages/Login/SignUp/SignUp";
+import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
 const routes=createBrowserRouter([
     {
@@ -30,12 +31,12 @@ const routes=createBrowserRouter([
             },
             {
                 path:'/mobiles/:brand',
-                element: <AllChategoryPhone></AllChategoryPhone>,
+                element: <PrivateRoutes><AllChategoryPhone></AllChategoryPhone></PrivateRoutes>,
                 loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}`),
             },
             {
                 path:'/mobiles/:brand/:id',
-                element: <PhoneDetails></PhoneDetails>,
+                element: <PrivateRoutes><PhoneDetails></PhoneDetails></PrivateRoutes>,
                 loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}/${params.id}`),
             },
         ]
