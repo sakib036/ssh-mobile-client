@@ -3,7 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const AllChategoryPhone = () => {
     const brands=useLoaderData();
-    console.log(brands.length)
+    
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {
@@ -11,6 +11,7 @@ const AllChategoryPhone = () => {
                 <figure><img className='h-56' src={brand.picture} alt="Album" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{brand.brandName}</h2>
+                    <p>Model: {brand.model}</p>
                     <p>Years Of Use {brand.yearsOfUse}</p>
                     <p>Price :<span className='text-xl font-bold'> {brand.resalePrice}</span></p>
                     <div className="card-actions justify-end">

@@ -6,7 +6,7 @@ const PhoneDetails = () => {
     const phoneDetails = useLoaderData();
 
     const[openModal,setOpenModal]=useState(false);
-    console.log(openModal)
+ 
 
     
     const { picture, brandName, resalePrice, originalPrice, yearsOfUse, sellerPhone, submitDate, sellerName, details, model } = phoneDetails;

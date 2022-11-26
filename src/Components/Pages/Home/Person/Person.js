@@ -7,7 +7,7 @@ import card_phone_3 from '../../../../assets/Card-Phone/card-phone-3 (2).jpg';
 
 const Person = () => {
 
-    const cardFeatures=[
+    const carddatas=[
         {
             id:1,
             body:'Courier is open from anywhere you can take delivery through courier will reach you within 24-48 hours.',
@@ -33,11 +33,11 @@ const Person = () => {
             <img className='w-full h-96' src={person} alt="" />
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-6'>
                {
-                cardFeatures.map(cardFeature=> <div key={cardFeature.id} cardFeature={cardFeature} className="card  text-neutral-content">
-                <div className={`card-body items-center ${cardFeature.bgColor} text-center flex flex-row justify-enter items-center`}>
+                carddatas.map(carddata=> <div key={carddata.id} carddata={carddata} className="card  text-neutral-content">
+                <div className={`card-body items-center ${carddata.bgColor} text-center flex flex-row justify-enter items-center`}>
                     
-                    <p>{cardFeature.body}</p>
-                    <img className='w-24 rounded-2xl' src={cardFeature.image} alt="" />
+                    <p>{carddata.body}</p>
+                    <img className='w-24 rounded-2xl' src={carddata.image} alt="" />
                 </div>
             </div>)
                }

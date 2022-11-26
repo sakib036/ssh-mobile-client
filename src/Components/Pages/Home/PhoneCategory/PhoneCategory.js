@@ -77,6 +77,7 @@ const PhoneCategory = () => {
                             <figure><img className='w-96 h-52' src={samsung.picture} alt="Movie" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{(samsung.brandName).toUpperCase()}</h2>
+                                <p>Model:{samsung.model}</p>
                                 <p>{samsung.details}</p>
                                 <p> Price:{samsung.resalePrice}</p>
 
@@ -110,6 +111,7 @@ const PhoneCategory = () => {
                            <figure><img className='w-96 h-52' src={iphone.picture} alt="Movie" /></figure>
                            <div className="card-body">
                                <h2 className="card-title">{(iphone.brandName).toUpperCase()}</h2>
+                               <p>Model:{iphone.model}</p>
                                <p>{iphone.details}</p>
                                <p> Price:{iphone.resalePrice}</p>
 
@@ -143,6 +145,7 @@ const PhoneCategory = () => {
                             <figure><img className='w-96 h-52' src={other.picture} alt="Movie" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{(other.brandName).toUpperCase()}</h2>
+                                <p>Model:{other.model}</p>
                                 <p>{other.details}</p>
                                 <p> Price:{other.resalePrice}</p>
 
