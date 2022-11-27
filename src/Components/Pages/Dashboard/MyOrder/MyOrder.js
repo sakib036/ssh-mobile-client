@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import Loading from '../../../Common/Loading/Loading';
 
@@ -24,10 +24,7 @@ const MyOrder = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-const {buyersName,buyersEmail,buyersMobileNo,
-    mobileBrand,
-    mobileModel,
-    buyersLocation,mobilePrice , picture}=bookings;
+
 
 
     return (
@@ -35,7 +32,7 @@ const {buyersName,buyersEmail,buyersMobileNo,
             <h2 className='text-3xl my-5'>My Order</h2>
 
             {
-                bookings?<div className="overflow-x-auto">
+                bookings.length>0? <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>

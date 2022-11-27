@@ -1,6 +1,7 @@
-import { type } from '@testing-library/user-event/dist/type';
+
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 
@@ -10,14 +11,15 @@ const SignUp = () => {
 
     const { createUser, updateUserProfile } = useContext(AuthContext);
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit ,reset} = useForm();
     const [signUpError, setSignUpError] = useState('');
+    console.log(signUpError)
 
-    const [createUserEmail, setCreateUserEmail] = useState('');
+    // const [createUserEmail, setCreateUserEmail] = useState('');
 
 
     // const [token] = useToken(createUserEmail)
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     // if (token) {
     //     navigate('/');
@@ -45,58 +47,77 @@ const SignUp = () => {
                     .then(res => res.json())
                     .then(imageData => {
                         if (imageData.success) {
-                           
+
                             const userInfo = {
                                 displayName: data.name,
-                                userImage:imageData.data.url,
-                                
+                                userImage: imageData.data.url,
+
                             }
                             updateUserProfile(userInfo)
-                                        .then(() =>{
-                                            saveUserDb(data.name, data.email,data.userType,imageData.data.url,)
-                                        })
-                                        .catch(error => {
-                                            console.error(error.message)
-                                            setSignUpError(error.message)
-                                        })
-                             
+                                .then(() => {
+                                    saveUserDb(data.name, data.email, data.userType, imageData.data.url,)
+                                })
+                                .catch(error => {
+                                    console.error(error)
+                                    setSignUpError(error.message)
+                                })
+
                         }
-                    })                      
+                    })
                     .catch(error => {
-                        console.error(error.message);
+                        console.error(error);
                         setSignUpError(error.message);
 
                     })
 
-                    const saveUserDb=(name,email,userType,userImage)=>{
-                        const user={name,email,userType,userImage}
-                        console.log(user);
-                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    setSignUpError(error.message);
 
-                // const saveUser = (name, email) => {
-                //     const user = { name, email };
-                //     fetch('https://doctors-portal-server-self.vercel.app/users', {
-                //         method: 'POST',
-                //         headers: {
-                //             'content-type': 'application/json'
-                //         },
-                //         body: JSON.stringify(user)
-                //     })
-                //         .then(res => res.json())
-                //         .then(data => {
-                //             console.log(data)
-                //             setCreateUserEmail(email)
+                })
 
+                const saveUserDb = (name, email, userType, userImage) => {
+                    const user = {
+                        userName: name,
+                        userEmail: email,
+                        userType: userType,
+                        userImage: userImage
+                    };
+                    fetch('http://localhost:5000/users', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if(data.acknowledged) {
+                                toast.success('User SignUp Successfully');
+                                reset(data)
+                                navigate('/')
 
-            })
+                            }                             
+                                
+                        })
 
-        // }
+                        .catch(error => {
+                            console.error(error);
+                            setSignUpError(error.message);
+    
+                        })
+            
+                }
+          
+
     }
 
 
 
     return (
-       
+
         <div className='flex justify-center items-center my-12'>
 
             <div className='w-96 border-2 p-6 rounded-xl'>
@@ -109,7 +130,7 @@ const SignUp = () => {
 
 
                     <div class="flex items-center space-x-6">
-                        <div class="shrink-0">
+                        <div className="shrink-0">
                             <img className="h-16 w-16 object-cover rounded-full my-4" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80" alt="" />
                         </div>
                         <label className="block">
