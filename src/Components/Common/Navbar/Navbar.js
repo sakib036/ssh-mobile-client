@@ -12,11 +12,13 @@ import logo from '../../../assets/Mobi.png'
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    // const navigate=useNavigate();
+    const navigate=useNavigate();
 
     const handelLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => {
+                navigate("/login")
+             })
             .catch(error => console.error(error))
     }
 

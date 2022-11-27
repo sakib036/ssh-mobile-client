@@ -1,20 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../../Contexts/AuthProvider';
+import Loading from '../../../Common/Loading/Loading';
 
 const AllUser = () => {
 
+    const {user}=useContext(AuthContext);
 
-    const { data: users = [] } = useQuery({
-        queryKey: ['users'],
+    const { data: users = [] ,isLoading } = useQuery({
+        queryKey: ['users', user?.email],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/users');
             const data = await res.json();
             return data;
         }
     })
-
-    const handelMakeAdmin=()=>{
-
+    if (isLoading) {
+        return <Loading></Loading>
     }
 
 
@@ -30,6 +32,7 @@ const AllUser = () => {
                             <th>Email</th>
                             <th>User Type</th>
                             <th>Verify</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +43,7 @@ const AllUser = () => {
                             //  userImage: userImage
 
 
-                            users.map((user, index) =><tr key={index} className="hover">
+                            users?.map((user, index) =><tr key={index} className="hover">
                             <th>
                             {index+1}
                             </th>
@@ -62,8 +65,12 @@ const AllUser = () => {
                               
                             </td>
                             <td>{user.userType}</td>
+                            <td>Not Verify</td>
                             <th>
-                              <button className="btn btn-ghost btn-xs">delete</button>
+                                {
+                                    user.userType==="Admin"?<button disabled className="btn btn-ghost btn-xs">Admin</button>:<button className="btn btn-ghost btn-xs">delete</button>
+                                }
+                              
                             </th>
                           </tr>)
                         }

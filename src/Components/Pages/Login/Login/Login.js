@@ -18,7 +18,7 @@ const Login = () => {
     const {signIn}=useContext(AuthContext);
 
     const handelLogin = data => {
-        console.log(data);
+       
         setLoginError('');
         signIn(data.email, data.password)
         .then(result => {
