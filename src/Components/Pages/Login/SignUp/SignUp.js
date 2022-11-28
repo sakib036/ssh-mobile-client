@@ -55,7 +55,8 @@ const SignUp = () => {
                             }
                             updateUserProfile(userInfo)
                                 .then(() => {
-                                    saveUserDb(data.name, data.email, data.userType, imageData.data.url,)
+                                    saveUserDb(data.name, data.email, data.userType, imageData.data.url,user.uid )
+                                        console.log(user.uid)
                                 })
                                 .catch(error => {
                                     console.error(error)
@@ -76,13 +77,15 @@ const SignUp = () => {
                     setSignUpError(error.message);
 
                 })
+                // console.log(user)
 
-                const saveUserDb = (name, email, userType, userImage) => {
+                const saveUserDb = (name, email, userType, userImage,uid) => {
                     const user = {
                         userName: name,
                         userEmail: email,
                         userType: userType,
-                        userImage: userImage
+                        userImage: userImage,
+                        userUid:uid
                     };
                     fetch('http://localhost:5000/users', {
                         method: 'POST',
@@ -129,7 +132,7 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit(handelSignUp)}>
 
 
-                    <div class="flex items-center space-x-6">
+                    <div className="flex items-center space-x-6">
                         <div className="shrink-0">
                             <img className="h-16 w-16 object-cover rounded-full my-4" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80" alt="" />
                         </div>

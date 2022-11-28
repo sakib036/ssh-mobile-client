@@ -1,15 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../../Contexts/AuthProvider';
+import { BeakerIcon, CheckIcon } from '@heroicons/react/24/solid'
+
+
 import Loading from '../../../../Common/Loading/Loading';
 
 const AllSeller = () => {
-    const {user}=useContext(AuthContext);
 
-    const { data: allUsers = [] ,isLoading } = useQuery({
-        queryKey: ['users', user?.email],
+    const {removeUser}=useContext(AuthContext)
+    
+
+    const { data: users = [] ,isLoading,refetch } = useQuery({
+        queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
+            const res = await fetch('http://localhost:5000/seller');
             const data = await res.json()
             return data;
         }
@@ -18,12 +24,57 @@ const AllSeller = () => {
         return <Loading></Loading>
     }
 
-    const users=allUsers.filter(user=>user.userType==='Seller');
+   const handelDeleteUser=(user)=>{
+    const agree = window.confirm(`Are You Sure You Wont to Delete ${user.userName}`);
+    if (agree) {
+      fetch(`http://localhost:5000/users/${user._id}`, {
+        method: 'DELETE',
+
+      })
+        .then(res => res.json())
+        .then(data => {
+
+          if (data.deletedCount > 0) {
+            removeUser(user.userUid)
+            console.log(user.userUid)
+            .then(() => {})
+            .catch(error=>console.error(error))
+
+            refetch();
+
+            toast.error(`Delete User ${user.userName} successfully `)
+          }
+
+
+        })
+        .catch(error=>console.error(error))
+    }
+   }
+
+   const handelVerify=(user)=>{
+
+    fetch(`http://localhost:5000/user/${user._id}`,{
+        method:'PUT',
+      
+
+  })
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data)
+        if(data.modifiedCount>0){
+            toast.success('User verify Success');
+            refetch();
+        }
+    })
+
+    .catch(error=>console.error(error))
+
+   }
 
 
     return (
         <div>
-            <h1>All Seller</h1>
+            <h1 className='my-20 text-5xl text-center'>All Seller</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -61,12 +112,16 @@ const AllSeller = () => {
                               
                             </td>
                             <td>{user.userType}</td>
-                            <td>Not Verify</td>
                             <th>
-                                {
-                                    user.userType==="Admin"?<button disabled className="btn btn-ghost btn-xs">Admin</button>:<button className="btn btn-ghost btn-xs">delete</button>
-                                }
-                              
+                            {
+                                user.isVerify?<button disabled className="btn btn-ghost btn-xs"><span><CheckIcon className="h-6 w-6 text-green-500"/></span>Verified User</button>:
+                                <button onClick={()=>handelVerify(user)} className="btn btn-ghost btn-xs">Verify</button>
+                            }
+
+                            </th>
+                           
+                            <th>
+                            <button onClick={()=>handelDeleteUser(user)} className="btn btn-ghost btn-xs">delete</button>
                             </th>
                           </tr>)
                         }

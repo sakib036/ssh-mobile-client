@@ -1,5 +1,8 @@
+import { CheckIcon } from '@heroicons/react/24/solid';
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Loading from '../../../../Common/Loading/Loading';
 import BookingModal from '../BookingModal/BookingModal';
 
 const PhoneDetails = () => {
@@ -7,9 +10,24 @@ const PhoneDetails = () => {
 
     const[openModal,setOpenModal]=useState(false);
  
+    const { picture, brandName, resalePrice, originalPrice, yearsOfUse, sellerPhone, submitDate, sellerName, details, model,sellerEmail } = phoneDetails;
 
-    
-    const { picture, brandName, resalePrice, originalPrice, yearsOfUse, sellerPhone, submitDate, sellerName, details, model } = phoneDetails;
+    const url = `http://localhost:5000/user/${sellerEmail}`;
+
+    const { data: user= [], isLoading } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch(url)
+            const data = await res.json()
+            return data;
+        }
+    })
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
+
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-xl p-10 my-10">
@@ -19,7 +37,9 @@ const PhoneDetails = () => {
                     <hr />
                     <p>Model No :{model}</p>
                     <hr />
-                    <p>Seller Name :{sellerName}</p>
+                    {
+                        user.isVerify?<p>Seller Name : <span> <CheckIcon className="h-6 w-6 text-green-500"/></span>  {sellerName}</p>:<p>Seller Name :{sellerName}</p>
+                    }
                     <hr />
                     <p>Years Of Use :{yearsOfUse}</p>
                     <hr />
@@ -34,7 +54,10 @@ const PhoneDetails = () => {
                     <p>Seller Phone No:{sellerPhone}</p>
                     <hr />
                     <div className="card-actions justify-end">
-                    <label onClick={()=>setOpenModal(true)} htmlFor="booking-mobile" className="btn btn-primary">Book Now</label>
+                    {
+                        user.isVerify?<label onClick={()=>setOpenModal(true)} htmlFor="booking-mobile" className="btn btn-primary"> <CheckIcon className="h-6 w-6 text-green-500"/> Book Now</label>:
+                        <label onClick={()=>setOpenModal(true)} htmlFor="booking-mobile" className="btn btn-primary">Book Now</label>
+                    }
                         
                     </div>
                 </div>

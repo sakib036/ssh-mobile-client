@@ -42,6 +42,7 @@ const DashboardLayout = () => {
                         (users.userType === "Admin")?<>
                         <li><Link to='/dashboard/seller'>All Seller</Link></li>
                         <li><Link to='/dashboard/users'>ALL USER</Link></li>
+                        <li><Link to='/dashboard/report'>Reported Items</Link></li>
                         
                     </>:(users.userType === "Seller")?<>
                                 <li><Link to='/dashboard/addProduct'>ADD A PRODUCT</Link></li>
