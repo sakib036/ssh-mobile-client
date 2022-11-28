@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../../Contexts/AuthProvider';
-import { BeakerIcon, CheckIcon } from '@heroicons/react/24/solid'
+import { CheckIcon } from '@heroicons/react/24/solid'
 
 
 import Loading from '../../../../Common/Loading/Loading';

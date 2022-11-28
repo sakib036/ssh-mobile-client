@@ -10,7 +10,7 @@ const Advertise = ({advertises}) => {
     return (
         <div className='my-20'>
 
-            <h1 className='text-center sm:text-3xl font-Bold'>This Is the Most Popular</h1>
+            <h1 className='text-center sm:text-3xl font-Bold my-6'>This Is the Most Popular</h1>
              <div>
             
            <>

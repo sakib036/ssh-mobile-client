@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 import Loading from '../../../Common/Loading/Loading';
@@ -10,7 +11,7 @@ const MyOrder = () => {
 
     const url = `http://localhost:5000/bookings?email=${user?.email}`;
 
-    const { data: bookings = [], isLoading } = useQuery({
+    const { data: bookings = [], isLoading , refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await fetch(url)
@@ -24,6 +25,29 @@ const MyOrder = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+
+    const handelDeleteUser=(booking)=>{
+      const agree = window.confirm(`Are You Sure You Wont to Cancel Order ${booking.model}`);
+      if (agree) {
+        fetch(`http://localhost:5000/bookings/${booking._id}`, {
+          method: 'DELETE',
+  
+        })
+          .then(res => res.json())
+          .then(data => {
+  
+            if (data.deletedCount > 0) {
+              
+              refetch();
+  
+              toast.error(`Delete Order ${booking.model} successfully `)
+            }
+  
+  
+          })
+          .catch(error=>console.error(error))
+      }
+     }
 
 
 
@@ -40,7 +64,7 @@ const MyOrder = () => {
                             <th>Product</th>
                             <th>Buyers</th>
                             <th>Price</th>
-                            <th>Delete</th>
+                            <th>Cancel Order</th>
                             <th>Pay</th>
                         </tr>
                     </thead>
@@ -72,7 +96,7 @@ const MyOrder = () => {
                             </td>
                             <td>{booking.mobilePrice}</td>
                             <th>
-                              <button className="btn btn-ghost btn-xs">Delete</button>
+                              <button onClick={()=>handelDeleteUser(booking)} className="btn btn-ghost btn-xs">Cancel Order</button>
                             </th>
                             <th>
                               <button className="btn btn-ghost btn-xs">Pay</button>
