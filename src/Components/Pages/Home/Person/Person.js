@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import person from '../../../../assets/personas-con-smartphones.jpg';
 import card_phone_1 from '../../../../assets/Card-Phone/card-phone-1.jpg';
 import card_phone_2 from '../../../../assets/Card-Phone/card-phone-2.jpg';
 import card_phone_3 from '../../../../assets/Card-Phone/card-phone-3 (2).jpg';
+import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 
 const Person = () => {
+    const {advertise}=useContext(AuthContext);
+    console.log(advertise)
 
     const carddatas=[
         {
@@ -29,9 +32,9 @@ const Person = () => {
         },
     ]
     return (
-        <div>
+        <div className='my-20'>
             <img className='w-full h-96' src={person} alt="" />
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-6'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-20'>
                {
                 carddatas.map(carddata=> <div key={carddata.id} carddata={carddata} className="card  text-neutral-content">
                 <div className={`card-body items-center ${carddata.bgColor} text-center flex flex-row justify-enter items-center`}>

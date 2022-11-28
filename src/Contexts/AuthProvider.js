@@ -13,6 +13,8 @@ const AuthProvider = ({children}) => {
 
     const [loading,setLoading]=useState(true);
 
+    const [advertise,setAdvertise]=useState([]);
+
 
 
     const createUser=(email,password)=>{
@@ -52,6 +54,8 @@ const AuthProvider = ({children}) => {
         logOut,
         updateUserProfile,
         loading,
+        setAdvertise,
+        advertise,
 
 
 

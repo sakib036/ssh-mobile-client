@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../../Contexts/AuthProvider';
 
 const BookingModal = ({ phoneDetails }) => {
-    const {_id, picture, brandName, resalePrice, originalPrice, yearsOfUse, sellerPhone, submitDate, sellerName, details, model } = phoneDetails;
+    const {_id, picture, brandName, resalePrice, model } = phoneDetails;
 
     const { user } = useContext(AuthContext);
     const navigate=useNavigate();

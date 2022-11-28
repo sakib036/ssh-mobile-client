@@ -51,7 +51,7 @@ const PhoneCategory = () => {
 
 
     return (
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-20'>
 
            <div>
             <button onClick={()=>handelCategorySearch('samsung')} className='text-3xl font-bold text-center my-6 btn btn-active btn-primary mx-2'>Samsung Brand</button>

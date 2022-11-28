@@ -3,6 +3,7 @@ import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
+import AllSeller from "../Pages/Dashboard/All User/AllSeller/AllSeller";
 import AllUser from "../Pages/Dashboard/All User/AllUser";
 import MyOrder from "../Pages/Dashboard/MyOrder/MyOrder";
 import MyProduct from "../Pages/Dashboard/MyProduct/MyProduct";
@@ -52,12 +53,16 @@ const routes=createBrowserRouter([
         element:<DashboardLayout></DashboardLayout>,
         children:[
             {
-                path:'/dashboard',
+                path:'/dashboard/myOrder',
                 element:<MyOrder></MyOrder>
             },
             {
                 path:'/dashboard/users',
                 element:<AllUser></AllUser>
+            },
+            {
+                path:'/dashboard/seller',
+                element:<AllSeller></AllSeller>
             },
             {
                 path:'/dashboard/addProduct',

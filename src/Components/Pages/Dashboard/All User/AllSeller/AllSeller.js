@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { AuthContext } from '../../../../Contexts/AuthProvider';
-import Loading from '../../../Common/Loading/Loading';
+import { AuthContext } from '../../../../../Contexts/AuthProvider';
+import Loading from '../../../../Common/Loading/Loading';
 
-const AllUser = () => {
-
+const AllSeller = () => {
     const {user}=useContext(AuthContext);
 
     const { data: allUsers = [] ,isLoading } = useQuery({
@@ -19,12 +18,12 @@ const AllUser = () => {
         return <Loading></Loading>
     }
 
-    const users=allUsers.filter(user=>user.userType==='User');
+    const users=allUsers.filter(user=>user.userType==='Seller');
 
 
     return (
         <div>
-            <h1>All User</h1>
+            <h1>All Seller</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -39,12 +38,7 @@ const AllUser = () => {
                     </thead>
                     <tbody>
                         {
-                            //  userName: name,
-                            //  userEmail: email,
-                            //  userType: userType,
-                            //  userImage: userImage
-
-
+                            
                             users?.map((user, index) =><tr key={index} className="hover">
                             <th>
                             {index+1}
@@ -85,4 +79,4 @@ const AllUser = () => {
     );
 };
 
-export default AllUser;
+export default AllSeller;
