@@ -10,7 +10,7 @@ const AddAProduct = () => {
     const { user } = useContext(AuthContext);
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    // const [signUpError, setSignUpError] = useState('');
+    
 
     const navigate=useNavigate();
     const date=format(new Date(),'PP');
@@ -63,7 +63,8 @@ const AddAProduct = () => {
             fetch('http://localhost:5000/mobiles', {
                         method: 'POST',
                         headers: {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            authorization:`bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(mobile)
                     })

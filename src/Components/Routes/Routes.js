@@ -7,6 +7,7 @@ import AllSeller from "../Pages/Dashboard/All User/AllSeller/AllSeller";
 import AllUser from "../Pages/Dashboard/All User/AllUser";
 import MyOrder from "../Pages/Dashboard/MyOrder/MyOrder";
 import MyProduct from "../Pages/Dashboard/MyProduct/MyProduct";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 import ReportedProduct from "../Pages/Dashboard/ReportedProduct/ReportedProduct";
 
 import Home from "../Pages/Home/Home/Home";
@@ -14,6 +15,7 @@ import AllChategoryPhone from "../Pages/Home/PhoneCategory/AllCategoryPhone/AllC
 import PhoneDetails from "../Pages/Home/PhoneCategory/PhoneDetails/PhoneDetails";
 import Login from "../Pages/Login/Login/Login";
 import SignUp from "../Pages/Login/SignUp/SignUp";
+import NotFound from "../Pages/NotFound/NotFound";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
 const routes=createBrowserRouter([
@@ -47,6 +49,11 @@ const routes=createBrowserRouter([
                 element: <PrivateRoutes><PhoneDetails></PhoneDetails></PrivateRoutes>,
                 loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}/${params.id}`),
             },
+            {
+                path:'/*',
+                element: <NotFound></NotFound>
+                
+            },
         ]
     },
     {
@@ -76,6 +83,16 @@ const routes=createBrowserRouter([
             {
                 path:'/dashboard/report',
                 element:<ReportedProduct></ReportedProduct>
+            },
+            {
+                path:'/dashboard/payment/:id',
+                element:<Payment></Payment>,
+                loader:({params})=>fetch(`http://localhost:5000/bookings/${params.id}`)
+            },
+            {
+                path:'/dashboard/*',
+                element: <NotFound></NotFound>
+                
             },
             
 

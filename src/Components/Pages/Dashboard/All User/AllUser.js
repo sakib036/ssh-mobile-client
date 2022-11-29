@@ -25,6 +25,10 @@ const AllUser = () => {
     if (agree) {
       fetch(`http://localhost:5000/users/${user._id}`, {
         method: 'DELETE',
+        headers: {
+         
+          authorization:`bearer ${localStorage.getItem('accessToken')}`
+      },
 
       })
         .then(res => res.json())

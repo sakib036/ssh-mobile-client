@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
+import useToken from '../../../../Hooks/useToken';
 
-// import useToken from '../../Hooks/useToken';
+
 
 const SignUp = () => {
 
@@ -13,21 +14,22 @@ const SignUp = () => {
 
     const { register, formState: { errors }, handleSubmit ,reset} = useForm();
     const [signUpError, setSignUpError] = useState('');
-    console.log(signUpError)
+   
 
-    // const [createUserEmail, setCreateUserEmail] = useState('');
+    const [createUserEmail, setCreateUserEmail] = useState('');
+    
 
 
-    // const [token] = useToken(createUserEmail)
+    const [token] = useToken(createUserEmail)
     const navigate = useNavigate();
 
-    // if (token) {
-    //     navigate('/');
-    // }
+    if (token) {
+        navigate('/');
+    }
 
-    const handelSignUp = data => {
+    const handelUserSignUp = data => {
 
-        console.log(data.userType)
+       
 
 
         setSignUpError('');
@@ -56,7 +58,7 @@ const SignUp = () => {
                             updateUserProfile(userInfo)
                                 .then(() => {
                                     saveUserDb(data.name, data.email, data.userType, imageData.data.url,user.uid )
-                                        console.log(user.uid)
+                                       
                                 })
                                 .catch(error => {
                                     console.error(error)
@@ -99,8 +101,9 @@ const SignUp = () => {
                             console.log(data)
                             if(data.acknowledged) {
                                 toast.success('User SignUp Successfully');
+                                setCreateUserEmail(email)
                                 reset(data)
-                                navigate('/')
+                                
 
                             }                             
                                 
@@ -129,7 +132,7 @@ const SignUp = () => {
                 </div>
 
 
-                <form onSubmit={handleSubmit(handelSignUp)}>
+                <form onSubmit={handleSubmit(handelUserSignUp)}>
 
 
                     <div className="flex items-center space-x-6">
@@ -138,13 +141,7 @@ const SignUp = () => {
                         </div>
                         <label className="block">
                             <span className="sr-only">Choose profile photo</span>
-                            <input type="file" {...register("file", { required: "Picture is required" })} className="block w-full text-sm text-slate-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-violet-50 file:text-violet-700
-      hover:file:bg-violet-100
-    "/>
+                            <input type="file" {...register("file", { required: "Picture is required" })} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"/>
                             {errors.file && <p className='text-red-400' role="alert">{errors.file?.message}</p>}
                         </label>
                     </div>

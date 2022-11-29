@@ -27,6 +27,10 @@ const ReportedProduct = () => {
         if (agree) {
           fetch(`http://localhost:5000/mobiles/${reportedMobile._id}`, {
             method: 'DELETE',
+            headers: {
+              
+              authorization:`bearer ${localStorage.getItem('accessToken')}`
+          },
     
           })
             .then(res => res.json())

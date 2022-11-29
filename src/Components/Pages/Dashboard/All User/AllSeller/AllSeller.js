@@ -24,11 +24,15 @@ const AllSeller = () => {
         return <Loading></Loading>
     }
 
-   const handelDeleteUser=(user)=>{
+   const handelToDeleteUser=(user)=>{
     const agree = window.confirm(`Are You Sure You Wont to Delete ${user.userName}`);
     if (agree) {
       fetch(`http://localhost:5000/users/${user._id}`, {
         method: 'DELETE',
+        headers: {
+          
+          authorization:`bearer ${localStorage.getItem('accessToken')}`
+      },
 
       })
         .then(res => res.json())
@@ -55,6 +59,10 @@ const AllSeller = () => {
 
     fetch(`http://localhost:5000/user/${user._id}`,{
         method:'PUT',
+        headers: {
+          
+          authorization:`bearer ${localStorage.getItem('accessToken')}`
+      },
       
 
   })
@@ -121,7 +129,7 @@ const AllSeller = () => {
                             </th>
                            
                             <th>
-                            <button onClick={()=>handelDeleteUser(user)} className="btn btn-ghost btn-xs">delete</button>
+                            <button onClick={()=>handelToDeleteUser(user)} className="btn btn-ghost btn-xs">delete</button>
                             </th>
                           </tr>)
                         }
