@@ -8,24 +8,32 @@ const Login = () => {
     const {signIn,providerGoogleLogIn}=useContext(AuthContext);
 
     const[loginUserEmail,setLoginUserEmail]=useState('');
-    const [token]=useToken(loginUserEmail)
+    const [token]=useToken(loginUserEmail);
+   
 
     
     const location=useLocation();
     const navigate=useNavigate();
-   
+    const { register, formState: { errors }, handleSubmit,reset } = useForm();
 
-    const form=location.state?.form?.pathname||'/'
+    const form=location.state?.form?.pathname||'/';
 
     if(token){
+       
+       
         navigate(form, {replace:true})
+       
     }
 
-    const { register, formState: { errors }, handleSubmit,reset } = useForm();
+
+   
+
+   
     const [loginError, setLoginError] = useState('');
    
 
     const handelLogin = data => {
+       
        
         setLoginError('');
         signIn(data.email, data.password)
@@ -34,6 +42,7 @@ const Login = () => {
            
             setLoginUserEmail(data.email);
             console.log(user);
+            setLoginUserEmail(data.email);
             reset(data)
 
         })
@@ -55,7 +64,7 @@ const Login = () => {
         })
 
     }
-
+    
 
 
     return (

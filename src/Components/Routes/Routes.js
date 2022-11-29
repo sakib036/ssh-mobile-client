@@ -16,7 +16,7 @@ import PhoneDetails from "../Pages/Home/PhoneCategory/PhoneDetails/PhoneDetails"
 import Login from "../Pages/Login/Login/Login";
 import SignUp from "../Pages/Login/SignUp/SignUp";
 import NotFound from "../Pages/NotFound/NotFound";
-import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
+
 
 const routes=createBrowserRouter([
     {
@@ -41,12 +41,12 @@ const routes=createBrowserRouter([
             },
             {
                 path:'/mobiles/:brand',
-                element: <PrivateRoutes><AllChategoryPhone></AllChategoryPhone></PrivateRoutes>,
+                element: <AllChategoryPhone></AllChategoryPhone>,
                 loader:({params})=>fetch(`https://ssh-mobile-server.vercel.app/mobiles/${params.brand}`),
             },
             {
                 path:'/mobiles/:brand/:id',
-                element: <PrivateRoutes><PhoneDetails></PhoneDetails></PrivateRoutes>,
+                element: <PhoneDetails></PhoneDetails>,
                 loader:({params})=>fetch(`https://ssh-mobile-server.vercel.app/mobiles/${params.brand}/${params.id}`),
             },
             {

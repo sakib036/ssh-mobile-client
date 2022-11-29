@@ -13,7 +13,7 @@ const AuthProvider = ({children}) => {
 
     const [loading,setLoading]=useState(true);
 
-    const [advertise,setAdvertise]=useState([]);
+   
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -60,7 +60,9 @@ const AuthProvider = ({children}) => {
             setUser(currentUser)
             setLoading(false);
         })
-        return ()=>unsubscribe();
+        return () => {
+            return unsubscribe();
+        }
     }, [])
 
     const authInfo={
@@ -70,8 +72,7 @@ const AuthProvider = ({children}) => {
         logOut,
         updateUserProfile,
         loading,
-        setAdvertise,
-        advertise,
+        
         removeUser,
         providerGoogleLogIn,
 
