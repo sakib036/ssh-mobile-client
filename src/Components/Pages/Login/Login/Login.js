@@ -5,6 +5,7 @@ import { AuthContext } from '../../../../Contexts/AuthProvider';
 import useToken from '../../../../Hooks/useToken';
 
 const Login = () => {
+    const {signIn,providerGoogleLogIn}=useContext(AuthContext);
 
     const[loginUserEmail,setLoginUserEmail]=useState('');
     const [token]=useToken(loginUserEmail)
@@ -22,7 +23,7 @@ const Login = () => {
 
     const { register, formState: { errors }, handleSubmit,reset } = useForm();
     const [loginError, setLoginError] = useState('');
-    const {signIn}=useContext(AuthContext);
+   
 
     const handelLogin = data => {
        
@@ -42,6 +43,20 @@ const Login = () => {
 
         })
     }
+
+    const handleGoogleLogIn=()=>{
+        providerGoogleLogIn()
+
+        .then(result => {
+            const user = result.user;
+
+            setLoginUserEmail(user.email);
+            console.log(user.email)
+        })
+
+    }
+
+
 
     return (
         <div className='my-12'>
@@ -73,13 +88,14 @@ const Login = () => {
                             <div>
                                 {loginError && <p className='text-red-600'>{loginError}</p>}
                             </div>
-                            <label className="label">
-                                <span className="label-text">Forget Password ?</span>
-                            </label>
+                           
 
                         </div>
                         <input className='btn btn-primary w-full  my-6' defaultValue='Log In' type="Submit" />
                     </form>
+                    <div className='px-10 '>
+                    <button onClick={handleGoogleLogIn} className="btn btn-active btn-secondary w-full">Continue with Google</button>
+                    </div>
                     <p>New to  SSH-Mobile please <Link to='/signup'  className='text-orange-800 font-bold'>SignUp</Link></p>
                 </div>
             </div>

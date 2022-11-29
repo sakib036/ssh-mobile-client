@@ -9,7 +9,7 @@ const MyProduct = () => {
   const { user } = useContext(AuthContext);
 
 
-  const url = `http://localhost:5000/mobiles/dashboard/myProduct/${user?.email}`;
+  const url = `https://ssh-mobile-server.vercel.app/mobiles/dashboard/myProduct/${user?.email}`;
 
   const { data: myProducts = [], isLoading, refetch } = useQuery({
     queryKey: ['myProducts', user?.email],
@@ -29,8 +29,12 @@ const MyProduct = () => {
   const handelDeleteProduct = id => {
     const agree = window.confirm(`Are You Sure You Wont to Delete`);
     if (agree) {
-      fetch(`http://localhost:5000/mobiles/${id}`, {
+      fetch(`https://ssh-mobile-server.vercel.app/mobiles/${id}`, {
         method: 'DELETE',
+        headers: {
+          
+          authorization:`bearer ${localStorage.getItem('accessToken')}`
+      },
 
       })
         .then(res => res.json())
@@ -52,7 +56,7 @@ const MyProduct = () => {
 
   const handelAdvertise=myProduct=>{
    
-    fetch(`http://localhost:5000/mobiles/${myProduct._id}`,{
+    fetch(`https://ssh-mobile-server.vercel.app/mobiles/${myProduct._id}`,{
             method:'PUT',
           
 

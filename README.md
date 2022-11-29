@@ -21,3 +21,6 @@ Which is Second Hand Mobile Selling Website
 * Here use React, tailwind, hot-toast,daisyui also use firebase auth system.
 * Here Use MongoDb Database to store data.
 * Carousel use to Show Category wise Phone and Advertise section
+
+* AdminEmail : abc@abc.com
+* AdminPassword: abc123

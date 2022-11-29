@@ -9,7 +9,7 @@ const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
 
 
-    const url = `http://localhost:5000/users/dashboard/${user?.email}`;
+    const url = `https://ssh-mobile-server.vercel.app/users/dashboard/${user?.email}`;
 
     const { data: users = [], isLoading } = useQuery({
         queryKey: ['users', user?.email],

@@ -5,7 +5,7 @@ import Loading from '../../../Common/Loading/Loading';
 
 const ReportedProduct = () => {
 
-    const url = `http://localhost:5000/reported`;
+    const url = `https://ssh-mobile-server.vercel.app/reported`;
 
     const { data: reportedMobiles = [], isLoading, refetch } = useQuery({
         queryKey: ['mobiles'],
@@ -25,7 +25,7 @@ const ReportedProduct = () => {
 
         const agree = window.confirm(`Are You Sure You Wont to Delete ${reportedMobile.model}`);
         if (agree) {
-          fetch(`http://localhost:5000/mobiles/${reportedMobile._id}`, {
+          fetch(`https://ssh-mobile-server.vercel.app/mobiles/${reportedMobile._id}`, {
             method: 'DELETE',
             headers: {
               

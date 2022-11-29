@@ -60,7 +60,7 @@ const AddAProduct = () => {
                 submitDate:date,
 
             }
-            fetch('http://localhost:5000/mobiles', {
+            fetch('https://ssh-mobile-server.vercel.app/mobiles', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

@@ -23,7 +23,7 @@ const CheckoutForm = ({order}) => {
 
     useEffect(() => {
         
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://ssh-mobile-server.vercel.app/create-payment-intent", {
 
           method: "POST",
           headers: { 
@@ -97,7 +97,7 @@ const CheckoutForm = ({order}) => {
 
             }
 
-            fetch('http://localhost:5000/payments',{
+            fetch('https://ssh-mobile-server.vercel.app/payments',{
                 method:'POST',
                 headers:{
                     'content-type':'application/json',

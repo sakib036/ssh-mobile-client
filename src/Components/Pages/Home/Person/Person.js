@@ -3,12 +3,11 @@ import person from '../../../../assets/personas-con-smartphones.jpg';
 import card_phone_1 from '../../../../assets/Card-Phone/card-phone-1.jpg';
 import card_phone_2 from '../../../../assets/Card-Phone/card-phone-2.jpg';
 import card_phone_3 from '../../../../assets/Card-Phone/card-phone-3 (2).jpg';
-import { AuthContext } from '../../../../Contexts/AuthProvider';
+
 
 
 const Person = () => {
-    const {advertise}=useContext(AuthContext);
-    console.log(advertise)
+   
 
     const carddatas=[
         {

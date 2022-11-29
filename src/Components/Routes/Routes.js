@@ -42,12 +42,12 @@ const routes=createBrowserRouter([
             {
                 path:'/mobiles/:brand',
                 element: <PrivateRoutes><AllChategoryPhone></AllChategoryPhone></PrivateRoutes>,
-                loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}`),
+                loader:({params})=>fetch(`https://ssh-mobile-server.vercel.app/mobiles/${params.brand}`),
             },
             {
                 path:'/mobiles/:brand/:id',
                 element: <PrivateRoutes><PhoneDetails></PhoneDetails></PrivateRoutes>,
-                loader:({params})=>fetch(`http://localhost:5000/mobiles/${params.brand}/${params.id}`),
+                loader:({params})=>fetch(`https://ssh-mobile-server.vercel.app/mobiles/${params.brand}/${params.id}`),
             },
             {
                 path:'/*',
@@ -87,7 +87,7 @@ const routes=createBrowserRouter([
             {
                 path:'/dashboard/payment/:id',
                 element:<Payment></Payment>,
-                loader:({params})=>fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader:({params})=>fetch(`https://ssh-mobile-server.vercel.app/bookings/${params.id}`)
             },
             {
                 path:'/dashboard/*',

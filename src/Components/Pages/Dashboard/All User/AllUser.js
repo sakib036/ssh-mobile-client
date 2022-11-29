@@ -11,7 +11,7 @@ const AllUser = () => {
   const { data: users = [], isLoading ,refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/users');
+      const res = await fetch('https://ssh-mobile-server.vercel.app/users');
       const data = await res.json()
       return data;
     }
@@ -23,7 +23,7 @@ const AllUser = () => {
   const handelDeleteUser = (user) => {
     const agree = window.confirm(`Are You Sure You Wont to Delete ${user.userName}`);
     if (agree) {
-      fetch(`http://localhost:5000/users/${user._id}`, {
+      fetch(`https://ssh-mobile-server.vercel.app/users/${user._id}`, {
         method: 'DELETE',
         headers: {
          

@@ -8,7 +8,7 @@ import Advertise from './Advertise/Advertise';
 
 const Home = () => {
 
-    const url = 'http://localhost:5000/advertise';
+    const url = 'https://ssh-mobile-server.vercel.app/advertise';
 
     const { data: advertises = [], isLoading } = useQuery({
         queryKey: ['advertise'],
@@ -24,7 +24,7 @@ const Home = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(advertises.length)
+   
 
 
     return (

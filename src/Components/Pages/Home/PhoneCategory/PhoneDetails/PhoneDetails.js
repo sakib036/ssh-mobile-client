@@ -12,7 +12,7 @@ const PhoneDetails = () => {
  
     const { picture, brandName, resalePrice, originalPrice, yearsOfUse, sellerPhone, submitDate, sellerName, details, model,sellerEmail } = phoneDetails;
 
-    const url = `http://localhost:5000/user/${sellerEmail}`;
+    const url = `https://ssh-mobile-server.vercel.app/user/${sellerEmail}`;
 
     const { data: user= [], isLoading } = useQuery({
         queryKey: ['users'],

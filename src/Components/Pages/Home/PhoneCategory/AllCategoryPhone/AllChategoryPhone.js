@@ -8,7 +8,7 @@ const AllChategoryPhone = () => {
     const handelReport=(brand)=>{
         const agree = window.confirm(`Are You Sure You Wont to Report this ${brand.brandName}`);
         if(agree){
-            fetch(`http://localhost:5000/mobile/${brand._id}`,{
+            fetch(`https://ssh-mobile-server.vercel.app/mobile/${brand._id}`,{
             method:'PUT',
           
     

@@ -10,7 +10,7 @@ const MyOrder = () => {
 
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://ssh-mobile-server.vercel.app/bookings?email=${user?.email}`;
 
   const { data: bookings = [], isLoading, refetch } = useQuery({
     queryKey: ['bookings', user?.email],
@@ -30,7 +30,7 @@ const MyOrder = () => {
   const handelDeleteUser = (booking) => {
     const agree = window.confirm(`Are You Sure You Wont to Cancel Order ${booking.model}`);
     if (agree) {
-      fetch(`http://localhost:5000/bookings/${booking._id}`, {
+      fetch(`https://ssh-mobile-server.vercel.app/bookings/${booking._id}`, {
         method: 'DELETE',
         headers: {
 
